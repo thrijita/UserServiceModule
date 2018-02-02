@@ -55,6 +55,7 @@ public class UserController {
 		    {
 		        if (user == null) 
 		        {
+				//remove SOP and use loggers.
 		            System.out.println("Unable to update. User with email id " + user.getEmail() + " not found");
 		            return new ResponseEntity<UserModel>(HttpStatus.NOT_FOUND);
 		        }
@@ -71,6 +72,7 @@ public class UserController {
 		    public ResponseEntity<UserModel> deleteUser(@PathVariable("email") String email)
 			{
 		       
+			    //why user1?
 		        UserModel user1 = userdao.getuserbyEmail(email);
 		        if (user1 == null) 
 		        {
@@ -84,15 +86,18 @@ public class UserController {
 		        }
 		    }
 			
-			
+			//why singleuser??  can use just /user
 	//single user fetching
 			//@RequestMapping(value = "/getSingleUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 		@PostMapping("/getSingleUser")
+	//why @RequestBody UserModel user??  you need to send only emil
 		    public ResponseEntity<UserModel> getUser(@PathVariable("email") String email,@RequestBody UserModel user)
 		    {
+			    //why user1??
 		        UserModel user1=userdao.getuserbyEmail(email);
 		        if (user1 == null)
 		        {
+				//remove all SOPs
 		            System.out.println("User with email id " + user.getEmail() + " not found");
 		            return new ResponseEntity<UserModel>(HttpStatus.NOT_FOUND);
 		        }
